@@ -15,13 +15,14 @@ export default Header
 const styles = StyleSheet.create({
     container:{
         backgroundColor: colors.purple,
-        height: 150,
+        height: 160,
         justifyContent:"center",
         alignItems:"center"
     },
     title:{
-        fontSize:24,
-        color:colors.white
+        fontSize:20,
+        color:colors.white,
+        fontFamily: "PressStart2P-Regular"
     },
     subtitle:{
         fontSize:14,
