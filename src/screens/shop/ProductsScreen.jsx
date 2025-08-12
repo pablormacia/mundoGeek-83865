@@ -1,14 +1,18 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native'
-import products from '../data/products.json'
+import products from '../../data/products.json'
 import { useEffect, useState } from 'react'
-import KarlaRegularText from '../components/KarlaRegularFont'
-import Search from '../components/Search'
+import KarlaRegularText from '../../components/KarlaRegularFont'
+import Search from '../../components/Search'
 
-const ProductsScreen = ({category}) => {
+const ProductsScreen = ({route}) => {
     const [productsFiltered,setProductsFiltered] = useState([])
     const [keyword,setKeyword] = useState("")
 
     //console.log("Keyword: ",keyword)
+
+    const {category} = route.params
+
+    console.log(route)
 
     useEffect(()=>{
         const productsFilteredByCategory = products.filter(product=>product.category.toLowerCase()===category.toLowerCase())
