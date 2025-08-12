@@ -1,11 +1,9 @@
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import Header from './src/components/Header';
 import { useState, useEffect } from 'react';
-import ShopStackNavigator from './src/navigation/shop/ShopStackNavigator';
 import { NavigationContainer } from "@react-navigation/native";
+import TabsNavigator from './src/navigation/tabs/TabsNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,7 +29,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="light" />
-      <ShopStackNavigator />
+      <TabsNavigator />
     </NavigationContainer>
   );
 }
