@@ -27,7 +27,8 @@ const TabsNavigator = () => {
                 name="Cart" 
                 component={CartStackNavigator} 
                 options={{
-                    tabBarIcon: ({focused})=>(<Icon name="shopping-cart" size={24} color={focused?colors.purple:colors.mediumGray} />)
+                    tabBarIcon: ({focused})=>(<Icon name="shopping-cart" size={24} color={focused?colors.purple:colors.mediumGray} />),
+                    //tabBarBadge:0,           
                 }}
                 />
         </Tab.Navigator>

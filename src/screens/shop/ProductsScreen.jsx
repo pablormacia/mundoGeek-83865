@@ -3,6 +3,7 @@ import products from '../../data/products.json'
 import { useEffect, useState } from 'react'
 import KarlaRegularText from '../../components/KarlaRegularFont'
 import Search from '../../components/Search'
+import { useSelector } from 'react-redux'
 
 const ProductsScreen = ({ navigation, route }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -10,7 +11,8 @@ const ProductsScreen = ({ navigation, route }) => {
 
     //console.log("Keyword: ",keyword)
 
-    const { category } = route.params
+    //const { category } = route.params
+    const category = useSelector(state=>state.shopReducer.categorySelected)
 
     const renderProductsItem = ({ item }) => (
         <View>
