@@ -3,7 +3,8 @@ import products from '../../data/products.json'
 import { useEffect, useState } from 'react'
 import KarlaRegularText from '../../components/KarlaRegularFont'
 import Search from '../../components/Search'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
+import { setProductSelected } from '../../store/slices/shopSlice'
 
 const ProductsScreen = ({ navigation, route }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -14,9 +15,16 @@ const ProductsScreen = ({ navigation, route }) => {
     //const { category } = route.params
     const category = useSelector(state=>state.shopReducer.categorySelected)
 
+    const dispatch = useDispatch()
+
+    const handleSelectProduct = (product) => {
+        dispatch(setProductSelected(product))
+        navigation.navigate("Producto")
+    }
+
     const renderProductsItem = ({ item }) => (
         <View>
-            <Pressable onPress={() => navigation.navigate("Producto")}>
+            <Pressable onPress={() => handleSelectProduct(item)}>
                 <KarlaRegularText style={{ fontSize: 16 }}>{item.title}</KarlaRegularText>
             </Pressable>
         </View>
