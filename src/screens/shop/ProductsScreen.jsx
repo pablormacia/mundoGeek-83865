@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
-import products from '../../data/products.json'
+//import products from '../../data/products.json'
 import { useEffect, useState } from 'react'
 import KarlaRegularText from '../../components/KarlaRegularFont'
 import Search from '../../components/Search'
 import { useSelector,useDispatch } from 'react-redux'
 import { setProductSelected } from '../../store/slices/shopSlice'
+import { useGetProductsByCategoryQuery } from '../../services/shopApi'
 
 const ProductsScreen = ({ navigation, route }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -14,6 +15,8 @@ const ProductsScreen = ({ navigation, route }) => {
 
     //const { category } = route.params
     const category = useSelector(state=>state.shopReducer.categorySelected)
+
+    const {data:productsFilteredByCategory, isLoading, error} = useGetProductsByCategoryQuery(category.toLowerCase())
 
     const dispatch = useDispatch()
 
@@ -32,14 +35,14 @@ const ProductsScreen = ({ navigation, route }) => {
     )
 
     useEffect(() => {
-        const productsFilteredByCategory = products.filter(product => product.category.toLowerCase() === category.toLowerCase())
+        //const productsFilteredByCategory = products.filter(product => product.category.toLowerCase() === category.toLowerCase())
         if (keyword) { //Re-filtramos la lista de productos según la búsqueda del usuario
             const productsFilteredByKeyword = productsFilteredByCategory.filter(product => product.title.toLowerCase().includes(keyword.toLocaleLowerCase()))
             setProductsFiltered(productsFilteredByKeyword)
         } else {
             setProductsFiltered(productsFilteredByCategory)
         }
-    }, [category, keyword])
+    }, [category, keyword,productsFilteredByCategory])
 
     return (
         <View >

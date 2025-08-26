@@ -3,10 +3,14 @@ import { StyleSheet, Text, View, Image, FlatList,Pressable } from 'react-native'
 import FlatCard from '../../components/FlatCard';
 import { useSelector,useDispatch } from 'react-redux';
 import { setCategorySelected } from '../../store/slices/shopSlice';
+import { useGetCategoriesQuery } from '../../services/shopApi';
 
 const CategoriesScreen = ({navigation}) => {
 
-    const categories = useSelector(state=>state.shopReducer.categories)
+    //const categories = useSelector(state=>state.shopReducer.categories)
+    const {data:categories, isLoading, error} = useGetCategoriesQuery()
+
+    //console.log("Categories desde firebase",cateogires, isLoading,error )
 
     const dispatch = useDispatch()
 
