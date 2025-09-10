@@ -3,10 +3,21 @@ import { colors } from '../global/colors'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/Feather'
 import { clearSession } from '../db'
+import { clearUser } from '../store/slices/userSlice'
 
 const Header = ({ title, subtitle }) => {
   const navigation = useNavigation()
   const canGoBack = navigation.canGoBack()
+
+  const handleClearSession = async () => {
+    try {
+      await clearSession()
+      dispatch(clearUser())
+    } catch {
+      console.log("Hubo un error al limpiar la sesión")
+    }
+
+  }
 
   return (
     <View style={styles.container}>
@@ -17,12 +28,15 @@ const Header = ({ title, subtitle }) => {
           canGoBack && <Pressable onPress={() => navigation.goBack()}><Icon name="arrow-left-circle" size={32} color={colors.white} /></Pressable>
         }
         {/* <Image source={require('../../assets/logoo.svg')} /> No se puede SVG así */}
-        <Pressable onPress={null}><Icon name="log-out" size={32} color={colors.white} /></Pressable>
+        <Pressable onPress={handleClearSession}><Icon name="log-out" size={32} color={colors.white} /></Pressable>
       </View>
 
     </View>
   )
 }
+
+
+
 
 export default Header
 
@@ -31,16 +45,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.purple,
     height: 160,
     justifyContent: "center",
-    alignItems: "center"
+    //alignItems: "center"
   },
   title: {
     fontSize: 20,
     color: colors.white,
-    fontFamily: "PressStart2P-Regular"
+    fontFamily: "PressStart2P-Regular",
+    textAlign:"center"
   },
   subtitle: {
     fontSize: 14,
-    color: colors.white
+    color: colors.white,
+    textAlign:"center"
   },
   goBackIcon: {
     //position:"absolute",
@@ -49,7 +65,7 @@ const styles = StyleSheet.create({
   },
   iconsContainer:{
     flexDirection:"row",
-    justifyContent:"center",
+    justifyContent:"space-between",
     alignItems:"center",
     gap:48
   }
