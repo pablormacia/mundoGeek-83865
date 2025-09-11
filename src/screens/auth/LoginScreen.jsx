@@ -32,6 +32,8 @@ const LoginScreen = ({ navigation, route }) => {
                         dispatch(setLocalId(result.data.localId))
                     } else {
                         await clearSession();
+                        dispatch(setUserEmail(result.data.email))
+                        dispatch(setLocalId(result.data.localId))
                     }
                     
                 } catch (error) {
